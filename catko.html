@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cat clicker ko</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/libs/jquery.min.js"></script>
+</head>
+<body>
+<div class="cat">
+<h1> Click Images to increase count </h1>
+<img src=""  class="figure" data-bind="click:incrementCounter, attr:{src:urle}">
+<h1 class ="catname" data-bind="text:catname"></h1>
+<div class="catcount" data-bind="text:count"></div>
+<div class="catmessage" data-bind="text:level"></div>
+<h1>Nicknames</h1>
+<ul class="catlist" data-bind="foreach: nicknames">
+	<li data-bind="text:$data"></li></ul>
+
+</div>
+<script src="js/libs/knockout-3.2.0.js"></script>
+<script src="js/app.js"></script>
+
+
+</body>
