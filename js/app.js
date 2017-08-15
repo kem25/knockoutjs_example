@@ -1,14 +1,9 @@
-var ViewModel=function(){
-	this.catname=ko.observable('komala');
+var cat=function(){
+this.catname=ko.observable('komala');
 	this.count=ko.observable(0);
 	this.urle=ko.observable('images/catimage.jpg');
 	this.nicknames=ko.observableArray(["komala","deepu","komi","kodi"]);
 	
-
-	this.incrementCounter=function(){
-		this.count(this.count()+1);
-	};
-
 	this.level=ko.computed(function(){
 		var message;
 		var currentclicks=this.count();
@@ -29,6 +24,18 @@ var ViewModel=function(){
 		}
 		return message;
 	},this);
+}
+
+
+
+
+var ViewModel=function(){
+	this.currentCat=ko.observable(new cat());
+
+	this.incrementCounter=function(){
+		this.currentCat().count(this.currentCat().count()+1);
+	};
+
 
 }
 ko.applyBindings(new ViewModel())

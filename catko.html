@@ -9,12 +9,12 @@
 <body>
 <div class="cat">
 <h1> Click Images to increase count </h1>
-<img src=""  class="figure" data-bind="click:incrementCounter, attr:{src:urle}">
-<h1 class ="catname" data-bind="text:catname"></h1>
-<div class="catcount" data-bind="text:count"></div>
-<div class="catmessage" data-bind="text:level"></div>
+<img src=""  class="figure" data-bind="click:incrementCounter, attr:{src:currentCat().urle}">
+<h1 class ="catname" data-bind="text:currentCat().catname"></h1>
+<div class="catcount" data-bind="text:currentCat().count"></div>
+<div class="catmessage" data-bind="text:currentCat().level"></div>
 <h1>Nicknames</h1>
-<ul class="catlist" data-bind="foreach: nicknames">
+<ul class="catlist" data-bind="foreach:currentCat().nicknames">
 	<li data-bind="text:$data"></li></ul>
 
 </div>
