@@ -1,41 +1,78 @@
-var cat=function(){
-this.catname=ko.observable('komala');
-	this.count=ko.observable(0);
-	this.urle=ko.observable('images/catimage.jpg');
-	this.nicknames=ko.observableArray(["komala","deepu","komi","kodi"]);
-	
-	this.level=ko.computed(function(){
-		var message;
-		var currentclicks=this.count();
-		if(currentclicks<5){
-			message='new-born';
-		}
-		else if(currentclicks<10){
-			message='infant';
-		} 
-		else if(currentclicks<15){
-			message='teen';
-		}
-		else if(currentclicks<20){
-			message='adult';
-		}
-		else{
-			message='old';
-		}
-		return message;
-	},this);
-}
+var initialCats=[{
+    		 'catname' : 'redcat',
+    		 'catId' : 0,
+    		 'count' : 0,
+    		 'urle' : 'images/catimage.jpg',
+    		 'nicknames' : ['koms','deeps','deepu']
+    	}, {
+      	   	'catname' : 'blackcat',
+      	 	'catId' : 1,
+      	 	'count' : 0,
+      	 	'urle' : 'images/catimage2.jpg',
+      	 	'nicknames' : ['pavan','kem','pav']
+      	}, {
+      	 	'catname' :'bluecat',
+      	 	'catId' : 2,
+      	 	'count' : 0,
+      		'urle' : 'images/catimage3.jpg',
+      		'nicknames' : ['cuty','bluely']
+      	}, {
+      	 	'catname' :'pinkcat',
+      	 	'catId' : 3,
+      	 	'count' : 0,
+      	 	'urle' : 'images/catimage4.jpg',
+      	 	'nicknames' : ['pinky','kitty']
+      	}, {
+      	 	'catname' :'whitecat',
+      	 	'catId' : 4,
+      	 	'count' : 0,
+      	 	'urle' : 'images/catimage5.jpg',
+      	 	'nicknames' : ['snowy','oreo']
+      	}]
 
 
+var Cat = function(data) {
+    this.count = ko.observable(data.count);
+    this.catname = ko.observable(data.catname);
+    this.urle = ko.observable(data.urle);
+    this.nicknames = ko.observableArray(data.nicknames);
 
+    this.level = ko.computed(function() {
+        if(this.count() >= 20) {
+            return 'Adult';
+        }
+        else if(this.count() >= 15) {
+            return 'Teen';
+        }
+        else if (this.count() >= 10) {
+            return 'Child';
+        }
+        else if(this.count() >=5) {
+            return 'Infant';
+        }
+        else return 'Newborn';
 
-var ViewModel=function(){
-	this.currentCat=ko.observable(new cat());
+    }, this);
+};
 
-	this.incrementCounter=function(){
-		this.count(this.count()+1);
-	};
+var ViewModel = function() {
+    var self = this;
 
+    this.catList = ko.observableArray([]);
 
-}
-ko.applyBindings(new ViewModel())
+    initialCats.forEach(function(catItem) {
+        self.catList.push(new Cat(catItem));
+    });
+
+    this.currentCat = ko.observable( this.catList()[0] );
+
+    this.incrementCounter = function() {
+        self.currentCat().count(self.currentCat().count() + 1);
+    };
+
+    this.changeCat = function(cat) {
+        self.currentCat(cat);
+    };
+};
+
+ko.applyBindings(new ViewModel());

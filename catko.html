@@ -5,8 +5,12 @@
     <title>Cat clicker ko</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/libs/jquery.min.js"></script>
+    <script src="js/libs/knockout-3.2.0.js"></script>
 </head>
 <body>
+<ul id="cat-list" data-bind="foreach: catList">
+        <li data-bind="click: $parent.changeCat, text: catname"></li>
+    </ul>
 <div class="cat" data-bind="with:currentCat">
 <h1> Click Images to increase count </h1>
 <img src=""  class="figure" data-bind="click:$parent.incrementCounter, attr:{src:urle}">
@@ -18,8 +22,7 @@
 	<li data-bind="text:$data"></li></ul>
 
 </div>
-<script src="js/libs/knockout-3.2.0.js"></script>
+
 <script src="js/app.js"></script>
-
-
 </body>
+
